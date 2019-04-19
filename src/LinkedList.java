@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class LinkedList {
 	Node head;
 	
@@ -31,6 +33,9 @@ public class LinkedList {
 		System.out.println("\nInserting Node " + n);
 		insertNode(linkedList, 4);
 		PrintList(linkedList.head);
+		System.out.println("\nReversing linked list");
+		reverseLinkedList(linkedList);
+		PrintList(linkedList.head);
 	}
 	
 	static void PrintList(Node head) {
@@ -60,7 +65,6 @@ public class LinkedList {
 	}
 	
 	static void insertNode(LinkedList llist, int value) {
-		System.out.println("In insertNode");
 		Node node;
 		if (llist.head.data > value) {
 			Node tempNode = llist.head;
@@ -81,5 +85,23 @@ public class LinkedList {
 			}
 			node = node.next;
 		}
+	}
+	
+	static void reverseLinkedList(LinkedList llist) {
+		Node node = llist.head;
+		ArrayList<Node> nodeList = new ArrayList<Node>();
+		
+		while (node.next != null) {
+			nodeList.add(node);
+			node = node.next;
+		}
+		nodeList.add(node);
+		
+		for (int i = nodeList.size()-1; i > 0; i--) {
+			nodeList.get(i).next = nodeList.get(i-1);
+		}
+		nodeList.get(0).next = null;
+		llist.head = nodeList.get(nodeList.size()-1);
+		
 	}
 }
